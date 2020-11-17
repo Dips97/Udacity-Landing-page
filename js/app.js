@@ -85,7 +85,8 @@ function activeSection() {
 function scrollToAnchor() {
   navigation.addEventListener("click", function (e) {
     const linkClick = document.querySelector('#'+ e.target.dataset.nav);
-    linkClick.scrollIntoView();
+    linkClick.scrollIntoView(false);
+
   });
 }
 
