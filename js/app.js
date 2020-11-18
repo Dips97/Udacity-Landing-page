@@ -84,11 +84,13 @@ function activeSection() {
 // Scroll to anchor ID using scrollTO event
 function scrollToAnchor() {
   navigation.addEventListener("click", function (e) {
-    const linkClick = document.querySelector('#'+ e.target.dataset.nav);
-    linkClick.scrollIntoView({behavior: "smooth"});
+	  e.preventDefault();
+	  const linkClick = document.querySelector(e.target.getAttribute('href'));
+	  linkClick.scrollIntoView({behavior: "smooth"});
   });
 }
 
+scrollToAnchor();
 /**
  * End Main Functions
  * Begin Events
@@ -99,7 +101,7 @@ function scrollToAnchor() {
 navBuild();
 
 // Scroll to section on link click
-scrollToAnchor();
+
 
 // Set sections as active
 //adding the 'active' class scroll event listener
