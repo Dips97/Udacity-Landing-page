@@ -90,7 +90,7 @@ function scrollToAnchor() {
   });
 }
 
-scrollToAnchor();
+
 /**
  * End Main Functions
  * Begin Events
@@ -101,7 +101,7 @@ scrollToAnchor();
 navBuild();
 
 // Scroll to section on link click
-
+scrollToAnchor();
 
 // Set sections as active
 //adding the 'active' class scroll event listener
