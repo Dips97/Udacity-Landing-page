@@ -1,77 +1,43 @@
-/**
- *
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- *
- * Dependencies: None
- *
- * JS Version: ES2015/ES6
- *
- * JS Standard: ESlint
- *
- */
+//creating variable for navigation list
+const MyNav = document.querySelector("#navbar__list");
 
-/**
- * Define Global Variables
- *
- */
+//creating variables to store all section data and global use
+const mySections = document.querySelectorAll("section");
 
-//defining global variables
-const navigation = document.querySelector("#navbar__list");
-const sections = document.querySelectorAll("section");
+//empty variable to store list elements
+let navItems = "";
 
-/**
- * End Global Variables
- * Start Helper Functions
- *
- */
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
- */
-
-// build the nav
-//building dynamic navigation funtion
-function navBuild() {
-  let nav = " ";
-
-  for (let section of sections) {
-    const sectionID = section.id;
-    const sectionNavData = section.dataset.nav;
-
-    nav += `<li><a class="menu__link" href="#${sectionID}">${sectionNavData}</a></li>`;
-  }
-
-  //appending the navigation element
-  navigation.innerHTML = nav;
+//looping through sections using for loop and storing the values in upper empty variable
+for (let item of mySections) {
+  const sectionData = item.dataset.nav;
+  const sectionIds = item.id;
+  navItems += `<li><a class="menu__link" href="#${sectionIds}">${sectionData}</a></li>`;
 }
 
-// Add class 'active' to section when near top of viewport
-//getting the largest value that's less or equal to the element
+//adding list items(li) to the (ul) tag
+MyNav.innerHTML = navItems;
+
+//getting the largest value that's less or equal to the top of viewport
 const elementOffset = (section) => {
   return Math.floor(section.getBoundingClientRect().top);
 };
 
-//removing the 'active' class
+//'active' class remove function
 const activeClassremover = (section) => {
   section.classList.remove("your-active-class");
 };
 
-//adding the 'active' class
+//'active' class add function
 const activeClassAdd = (conditional, section) => {
   if (conditional) {
     section.classList.add("your-active-class");
   }
 };
 
-//implementing the 'active' status in the section
+//implementing the 'active' status in the section using for..of loop
 
 function activeSection() {
-  for (let items of sections) {
+  for (let items of mySections) {
     const elementsOffset = elementOffset(items);
 
     AddClasscondition = () => elementsOffset < 130 && elementsOffset >= -130;
@@ -81,28 +47,39 @@ function activeSection() {
   }
 }
 
+//adding the 'active' class scroll event listener
+window.addEventListener("scroll", activeSection);
+
+/* Back to Top button */
+//Getting the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.documentElement.scrollIntoView({ behavior: "smooth" });
+}
+
 // Scroll to anchor ID using scrollTO event
 function scrollToAnchor() {
-  navigation.addEventListener("click", function (e) {
-	  e.preventDefault();
-	  const linkClick = document.querySelector(e.target.getAttribute('href'));
-	  linkClick.scrollIntoView({behavior: "smooth"});
+  MyNav.addEventListener("click", function (e) {
+    e.preventDefault();
+    const linkClick = document.querySelector(e.target.getAttribute("href"));
+    linkClick.scrollIntoView({ behavior: "smooth" });
   });
 }
 
-
-/**
- * End Main Functions
- * Begin Events
- *
- */
-
-// Build menu
-navBuild();
-
-// Scroll to section on link click
+// Scroll to section on link click with smooth behaviour
 scrollToAnchor();
-
-// Set sections as active
-//adding the 'active' class scroll event listener
-window.addEventListener("scroll", activeSection);
