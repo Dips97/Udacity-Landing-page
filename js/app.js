@@ -50,29 +50,28 @@ function activeSection() {
 //adding the 'active' class scroll event listener
 window.addEventListener("scroll", activeSection);
 
-/* Back to Top button */
-//Getting the button:
-mybutton = document.getElementById("myBtn");
+/* Jump to Top button */
+const TopBtn = document.getElementById("myBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
+//calling the function on user Scroll
 window.onscroll = function () {
-  scrollFunction();
+  scrollingFunction();
 };
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
+function scrollingFunction() {
+  if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+    TopBtn.style.display = "block";
   } else {
-    mybutton.style.display = "none";
+    TopBtn.style.display = "none";
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+// page go up when user click on button with smooth behavior
 function topFunction() {
   document.documentElement.scrollIntoView({ behavior: "smooth" });
 }
 
-// Scroll to anchor ID using scrollTO event
+// Scroll to sections
 function scrollToAnchor() {
   MyNav.addEventListener("click", function (e) {
     e.preventDefault();
@@ -81,5 +80,5 @@ function scrollToAnchor() {
   });
 }
 
-// Scroll to section on link click with smooth behaviour
+// calling scroll function
 scrollToAnchor();
